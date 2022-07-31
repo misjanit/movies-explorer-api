@@ -6,28 +6,28 @@ const bodyParser = require('body-parser');
 
 // errors
 const { errors } = require('celebrate');
-const appErrors = require('./src/errors/app-errors');
-const NotFoundError = require('./src/errors/not-found-error');
+const appErrors = require('./errors/app-errors');
+const NotFoundError = require('./errors/not-found-error');
 
 // middlewares
-const { cors } = require('./src/middlewares/cors');
-const { requestLogger, errorLogger } = require('./src/middlewares/request-logger');
-const { authorize } = require('./src/middlewares/auth');
+const { cors } = require('./middlewares/cors');
+const { requestLogger, errorLogger } = require('./middlewares/request-logger');
+const { authorize } = require('./middlewares/auth');
 
 // controllers
-const { login, createUser } = require('./src/controllers/users');
+const { login, createUser } = require('./controllers/users');
 
 // routes
-const usersRoutes = require('./src/routes/users');
-const moviesRoutes = require('./src/routes/movies');
+const usersRoutes = require('./routes/users');
+const moviesRoutes = require('./routes/movies');
 
 const { PORT = 3000 } = process.env;
 const app = express();
 
 app.use(cors);
 
-app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 mongoose.connect('mongodb://localhost:27017/movies', { useNewUrlParser: true });
 

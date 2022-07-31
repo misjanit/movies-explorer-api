@@ -54,7 +54,7 @@ module.exports.updateUser = (req, res, next) => {
 };
 
 // Создать пользователя (регистрация)
-module.exports.createUser = (res, req, next) => {
+module.exports.createUser = (req, res, next) => {
   const { name, email, password } = req.body;
 
   bcrypt.hash(password, 10)
