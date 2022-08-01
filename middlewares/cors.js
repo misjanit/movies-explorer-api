@@ -1,6 +1,10 @@
 const allowedUrls = [
   'http://praktikum.tk',
   'https://praktikum.tk',
+  'http://kinosite.api.nomoredomains.xyz',
+  'https://kinosite.api.nomoredomains.xyz',
+  'http://kinosite.nomoredomains.xyz',
+  'https://kinosite.nomoredomains.xyz',
   'http://localhost:3000',
   'localhost:3000',
 ];
