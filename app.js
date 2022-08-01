@@ -21,7 +21,7 @@ const { login, createUser } = require('./controllers/users');
 const usersRoutes = require('./routes/users');
 const moviesRoutes = require('./routes/movies');
 
-const { PORT = 3000 } = process.env;
+const { PORT = 3000, DB_CONN, NODE_ENV } = process.env;
 const app = express();
 
 app.use(cors);
@@ -29,7 +29,7 @@ app.use(cors);
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-mongoose.connect('mongodb://localhost:27017/movies', { useNewUrlParser: true });
+mongoose.connect(NODE_ENV === 'production' ? DB_CONN : 'mongodb://localhost:27017/movies');
 
 app.use(requestLogger);
 
