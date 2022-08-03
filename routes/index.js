@@ -12,17 +12,7 @@ router.use('/users', usersRoutes);
 router.use('/movies', moviesRoutes);
 
 router.use((req, res, next) => {
-  Promise.reject(new NotFoundError(appErrors.ERROR_BAD_REQUEST))
-    .catch(next);
-});
-
-// Централизованный обработчик ошибок
-router.use((err, req, res, next) => {
-  const { statusCode = 500, message } = err;
-  res.status(statusCode).send({
-    message: statusCode === 500 ? 'На сервере произошла ошибка' : message,
-  });
-  next();
+  next(new NotFoundError(appErrors.ERROR_PAGE_NOT_FOUND));
 });
 
 module.exports = router;
