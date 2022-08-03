@@ -20,8 +20,8 @@ app.use(bodyParser.json());
 mongoose.connect(NODE_ENV === 'production' ? DB_CONN : moviesdb);
 
 app.use(limiter);
+app.use(errors());
 app.use(router);
 app.use(requestLogger);
 app.use(errorLogger);
-app.use(errors());
 app.listen(PORT, () => { });
