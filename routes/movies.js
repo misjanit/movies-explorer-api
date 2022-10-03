@@ -1,6 +1,6 @@
 const router = require('express').Router();
+const validator = require('validator');
 const { celebrate, Joi } = require('celebrate');
-const { regexpLink } = require('../utils/constants');
 
 const { getMovies, createMovie, deleteMovie } = require('../controllers/movies');
 
@@ -15,9 +15,24 @@ router.post('/', celebrate({
     duration: Joi.number().required(),
     year: Joi.string().required(),
     description: Joi.string().required(),
-    image: Joi.string().required().pattern(regexpLink),
-    trailerLink: Joi.string().required().pattern(regexpLink),
-    thumbnail: Joi.string().required().pattern(regexpLink),
+    image: Joi.string().required().custom((value, helpers) => {
+      if (validator.isURL(value)) {
+        return value;
+      }
+      return helpers.message('Image is not URL');
+    }),
+    trailerLink: Joi.string().required().custom((value, helpers) => {
+      if (validator.isURL(value)) {
+        return value;
+      }
+      return helpers.message('TrailerLink is not URL');
+    }),
+    thumbnail: Joi.string().required().custom((value, helpers) => {
+      if (validator.isURL(value)) {
+        return value;
+      }
+      return helpers.message('Thumbnail is not URL');
+    }),
     movieId: Joi.number().required(),
     nameRU: Joi.string().required(),
     nameEN: Joi.string().required(),

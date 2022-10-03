@@ -7,6 +7,8 @@ const allowedUrls = [
   'https://kinosite.nomoredomains.xyz',
   'http://localhost:3000',
   'localhost:3000',
+  'localhost:3001',
+  'http://localhost:3001',
 ];
 
 module.exports.cors = (req, res, next) => {
